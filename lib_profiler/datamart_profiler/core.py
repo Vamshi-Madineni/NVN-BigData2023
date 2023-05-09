@@ -200,11 +200,12 @@ def load_data(data, load_max_size=None, indexes=True):
 
         column_names = data.columns
 
-    elif data[:-8] == ".parquet" :
-        data = stack.enter_context(open(data, 'rb'))
-        data = pandas.read_parquet(data)
-        metadata['nb_rows'] = len(data)
-        column_names = data.columns
+    elif data[-8:] == ".parquet" :
+        with contextlib.ExitStack() as stack:
+            data = stack.enter_context(open(data, 'rb'))
+            data = pandas.read_parquet(data)
+            metadata['nb_rows'] = len(data)
+            column_names = data.columns
         
     else:
         if not load_max_size:

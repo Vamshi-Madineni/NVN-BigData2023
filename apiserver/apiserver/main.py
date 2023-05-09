@@ -267,7 +267,7 @@ class QueryDuckDB(BaseHandler, GracefulHandler):
             duckdb.execute(f"CREATE TABLE data AS SELECT * FROM read_parquet('s3://nvn/{object_name}')")
             # duckdb.execute(f"CREATE TABLE data AS SELECT * FROM read_parquet('s3://nvn/userdata1.parquet')")
             # result = duckdb.sql("SELECT * FROM data LIMIT 10").fetchnumpy()
-            result = json.loads(duckdb.execute("SELECT * FROM data LIMIT 10").fetchdf().to_json(orient="table"))
+            result = json.loads(duckdb.execute(query).fetchdf().to_json(orient="table"))
             duckdb.execute("DROP TABLE data")
             logger.info("Completed query")
             logger.info("Result: %s", result)
