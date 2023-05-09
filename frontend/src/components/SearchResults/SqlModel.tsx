@@ -239,52 +239,52 @@ const PopupModel: React.FC<ModelProps> = ({
     resetDataset();
     setsqlQuery('select * from DATASET;');
   };
-  const hardcodejson =
-      {"results": {"schema": {"fields": [{"name": "index", "type": "integer"}, {"name": "County", "type": "string"}, {"name": "Year", "type": "integer"}, {"name": "Data_Type", "type": "string"}, {"name": "Mode", "type": "string"}, {"name": "Share", "type": "number"}, {"name": "Source", "type": "string"}], "primaryKey": ["index"], "pandas_version": "0.20.0"}, "data": [{"index": 0, "County": "Alameda County", "Year": 1960, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.749, "Source": "BayAreaCensus"}, {"index": 1, "County": "Alameda County", "Year": 1970, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.783, "Source": "BayAreaCensus"}, {"index": 2, "County": "Alameda County", "Year": 1980, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.776, "Source": "NHGIS_Census"}, {"index": 3, "County": "Alameda County", "Year": 1990, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.795, "Source": "NHGIS_Census"}, {"index": 4, "County": "Alameda County", "Year": 2000, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.802, "Source": "NHGIS_Census"}, {"index": 5, "County": "Alameda County", "Year": 2006, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.768, "Source": "B08301_ACS06_1YR"}, {"index": 6, "County": "Alameda County", "Year": 2007, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.774, "Source": "B08301_ACS07_1YR"}, {"index": 7, "County": "Alameda County", "Year": 2008, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.767, "Source": "B08301_ACS08_1YR"}, {"index": 8, "County": "Alameda County", "Year": 2009, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.764, "Source": "B08301_ACS09_1YR"}, {"index": 9, "County": "Alameda County", "Year": 2010, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.777, "Source": "B08301_ACS10_1YR"}]}};
-  const [query_result, setQueryResults] = useState<QueryStructure>({
-    data: hardcodejson.results.data,
-    error: false,
-    message: '',
-    dtypes: hardcodejson.results.schema.fields.map(
-      (field: any) => field.type
-    ),
-  });
-  const TableComponent = useMemo(() => {
-    if (query_result && query_result.data.length) {
-      return (
-        <div className="results-div">
-          <Table style={{width: '100%'}}>
-            <TableHead style={{width: '100%', position: 'sticky', top: '0'}}>
-              <TableRow style={{backgroundColor: '#63508b'}}>
-                {Object.keys(query_results.data[0]).map((col, id) => (
-                  <TableCell key={id} style={{color: 'white'}}>
-                    {col}
-                    <div>
-                      <span className="badge badge-pill semtype semtype-enumeration">
-                        {query_result.dtypes[id]}
-                      </span>
-                    </div>
-                  </TableCell>
-                ))}
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {query_results.data.map((row, id) => (
-                <TableRow key={id} className="table-row">
-                  {Object.values(row).map((val, id) => (
-                    <TableCell key={id}>
-                      {typeof val === 'string' ? val.substring(0, 150) : val}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))}
-            </TableBody>
-          </Table>
-        </div>
-      );
-    }
-    return <div></div>;
-  }, [query_results]);
+  // const hardcodejson =
+  //     {"results": {"schema": {"fields": [{"name": "index", "type": "integer"}, {"name": "County", "type": "string"}, {"name": "Year", "type": "integer"}, {"name": "Data_Type", "type": "string"}, {"name": "Mode", "type": "string"}, {"name": "Share", "type": "number"}, {"name": "Source", "type": "string"}], "primaryKey": ["index"], "pandas_version": "0.20.0"}, "data": [{"index": 0, "County": "Alameda County", "Year": 1960, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.749, "Source": "BayAreaCensus"}, {"index": 1, "County": "Alameda County", "Year": 1970, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.783, "Source": "BayAreaCensus"}, {"index": 2, "County": "Alameda County", "Year": 1980, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.776, "Source": "NHGIS_Census"}, {"index": 3, "County": "Alameda County", "Year": 1990, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.795, "Source": "NHGIS_Census"}, {"index": 4, "County": "Alameda County", "Year": 2000, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.802, "Source": "NHGIS_Census"}, {"index": 5, "County": "Alameda County", "Year": 2006, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.768, "Source": "B08301_ACS06_1YR"}, {"index": 6, "County": "Alameda County", "Year": 2007, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.774, "Source": "B08301_ACS07_1YR"}, {"index": 7, "County": "Alameda County", "Year": 2008, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.767, "Source": "B08301_ACS08_1YR"}, {"index": 8, "County": "Alameda County", "Year": 2009, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.764, "Source": "B08301_ACS09_1YR"}, {"index": 9, "County": "Alameda County", "Year": 2010, "Data_Type": "Residence", "Mode": "All Auto", "Share": 0.777, "Source": "B08301_ACS10_1YR"}]}};
+  // const [query_result, setQueryResults] = useState<QueryStructure>({
+  //   data: hardcodejson.results.data,
+  //   error: false,
+  //   message: '',
+  //   dtypes: hardcodejson.results.schema.fields.map(
+  //     (field: any) => field.type
+  //   ),
+  // });
+  // const TableComponent = useMemo(() => {
+  //   if (query_result && query_result.data.length) {
+  //     return (
+  //       <div className="results-div">
+  //         <Table style={{width: '100%'}}>
+  //           <TableHead style={{width: '100%', position: 'sticky', top: '0'}}>
+  //             <TableRow style={{backgroundColor: '#63508b'}}>
+  //               {Object.keys(query_results.data[0]).map((col, id) => (
+  //                 <TableCell key={id} style={{color: 'white'}}>
+  //                   {col}
+  //                   <div>
+  //                     <span className="badge badge-pill semtype semtype-enumeration">
+  //                       {query_result.dtypes[id]}
+  //                     </span>
+  //                   </div>
+  //                 </TableCell>
+  //               ))}
+  //             </TableRow>
+  //           </TableHead>
+  //           <TableBody>
+  //             {query_results.data.map((row, id) => (
+  //               <TableRow key={id} className="table-row">
+  //                 {Object.values(row).map((val, id) => (
+  //                   <TableCell key={id}>
+  //                     {typeof val === 'string' ? val.substring(0, 150) : val}
+  //                   </TableCell>
+  //                 ))}
+  //               </TableRow>
+  //             ))}
+  //           </TableBody>
+  //         </Table>
+  //       </div>
+  //     );
+  //   }
+  //   return <div></div>;
+  // }, [query_results]);
   function downloadCsvData() {
     const csvData = Papa.unparse(query_results.data);
     const dataStr =
