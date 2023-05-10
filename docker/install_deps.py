@@ -51,7 +51,9 @@ def main(args):
             # Ignore 'directory' dependencies
         else:
             packages.append('%s==%s' % (package['name'], package['version']))
-
+    print("**********************************")
+    print("Installing packages:", packages)
+    
     subprocess.check_call(
         [
             'pip3',

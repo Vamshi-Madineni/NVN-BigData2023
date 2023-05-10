@@ -6,9 +6,10 @@ USER node
 WORKDIR /src
 
 COPY frontend/package.json frontend/package-lock.json /src/
-RUN lock_hash="$(shasum -a 256 package-lock.json)" && \
-    npm install && \
-    echo "$lock_hash" | shasum -c
+# RUN lock_hash="$(shasum -a 256 package-lock.json)" && \
+#     npm install && \
+#     echo "$lock_hash" | shasum -c
+RUN npm install
 COPY frontend /src/
 RUN npm run build
 

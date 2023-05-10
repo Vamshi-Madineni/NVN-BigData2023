@@ -18,7 +18,8 @@ services:
     ports:
       - 127.0.0.1:8020:9200
     volumes:
-      - ./volumes/elasticsearch:/usr/share/elasticsearch/data
+      - ./volumes/elasticsearch:/var/lib/elasticsearch/data
+      - ./docker/synonyms.txt:/var/lib/elasticsearch/config/synonyms/synonyms.txt
       - ./docker/synonyms.txt:/usr/share/elasticsearch/config/synonyms/synonyms.txt
   elasticsearch-exporter:
     image: justwatch/elasticsearch_exporter:1.1.0

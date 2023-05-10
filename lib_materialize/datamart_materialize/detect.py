@@ -14,6 +14,7 @@ from .pivot import pivot_table
 from .spss import spss_to_csv
 from .stata import stata_to_csv
 from .tsv import tsv_to_csv
+from .csv import csv_to_parquet
 
 
 logger = logging.getLogger(__name__)
@@ -189,5 +190,16 @@ def detect_format_convert_to_csv(dataset_path, convert_dataset, materialize):
                                               non_matches, date_label),
                 dataset_path,
             )
-
+    
     return dataset_path
+
+def detect_format_convert_parquet(dataset_path, convert_dataset, materialize):
+    """Detect CSV file format and convert to Parquet if needed."""
+    dataset_path = detect_format_convert_to_csv(dataset_path, convert_dataset, materialize)
+    dataset_path = convert_dataset(csv_to_parquet, dataset_path)
+    return dataset_path
+
+   
+   
+   
+   

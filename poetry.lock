@@ -8,7 +8,7 @@ python-versions = "*"
 
 [package.dependencies]
 ndg-httpsclient = "*"
-netifaces = ">=0.10.5"
+netifaces = ">=0.10.5" 
 pyasn1 = "*"
 pyopenssl = "*"
 requests = ">=2.18.0,<3.0"
@@ -269,6 +269,83 @@ ssh = ["bcrypt (>=3.1.5)"]
 test = ["pytest (>=6.0)", "pytest-cov", "pytest-subtests", "pytest-xdist", "pretend", "iso8601", "pytz", "hypothesis (>=1.11.4,!=3.79.2)"]
 
 [[package]]
+name = "duckdb"
+version = "0.7.1"
+description = "API service of duckdb"
+category = "main"
+optional = false
+python-versions = "*"
+develop = true
+
+
+[[package]]
+name = "duckdb"
+version = "0.7.1"
+description = "API service"     
+category = "dev"
+optional = false
+python-versions = "*"
+develop = true
+
+
+[[package]]
+name = "pyarrow"
+version = "12.0.0"
+description = "API service of pyarrow"
+category = "main"
+optional = false
+python-versions = "*"
+develop = true
+
+
+[[package]]
+name = "pyarrow"
+version = "12.0.0"
+description = "API service"     
+category = "dev"
+optional = false
+python-versions = "*"
+develop = true
+
+[[package]]
+name = "minio"
+version = "7.1.14"
+description = "API service of minio"
+category = "main"
+optional = false
+python-versions = "*"
+develop = true
+
+
+[[package]]
+name = "minio"
+version = "7.1.14"
+description = "API service"     
+category = "dev"
+optional = false
+python-versions = "*"
+develop = true
+
+[[package]]
+name = "multiprocess"
+version = "0.70.14"
+description = "API service of minio"
+category = "main"
+optional = false
+python-versions = "*"
+develop = true
+
+
+[[package]]
+name = "multiprocess"
+version = "0.70.14"
+description = "API service"     
+category = "dev"
+optional = false
+python-versions = "*"
+develop = true
+
+[[package]]
 name = "datamart-api-service"
 version = "0.0"
 description = "API service of Auctus"
@@ -293,6 +370,7 @@ opentelemetry-instrumentation-tornado = "*"
 prometheus_client = "*"
 redis = ">=3.4,<4.0"
 tornado = ">=5.0"
+duckdb = "0.7.1"
 
 [package.source]
 type = "directory"

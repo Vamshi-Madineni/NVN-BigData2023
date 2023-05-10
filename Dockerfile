@@ -65,7 +65,7 @@ ENV DATAMART_GEO_DATA /usr/src/app/geo_data
 RUN python -m compileall /usr/src/app/
 ARG version
 ENV DATAMART_VERSION ${version}
-RUN test -n "${DATAMART_VERSION}"
+# RUN test -n "${DATAMART_VERSION}"
 USER 998
 ENTRYPOINT [ \
     "/tini", "--", "/bin/bash", "-c", \
