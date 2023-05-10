@@ -163,12 +163,10 @@ export function DownloadButtons(props: {hit: SearchResult; session?: Session}) {
   }
   return (
     <ButtonGroup>
-      <a href="http://localhost:8080/user/querydataset"
-        target="_blank"
-        rel="noreferrer"
-        >
+      <a href="http://localhost:5001/" target="_blank" rel="noreferrer">
         <button>Execute SQL</button>
       </a>
+      ;
       <IdCopyButton id={hit.id} />
       <LinkButton
         href={`${API_URL}/download/${hit.id}`}
