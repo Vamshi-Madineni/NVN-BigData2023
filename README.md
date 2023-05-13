@@ -12,6 +12,8 @@ Python should be installed
 
 [Documentation is available here](https://docs.auctus.vida-nyu.org/)
 
+[Documention of modified architecture and implemented features](https://github.com/Vamshi-Madineni/NVN-BigData2023/blob/master/NVN_BigData_FInal_Report.pdf)
+
 It is divided in multiple components:
 
 * Libraries
