@@ -119,6 +119,16 @@ Then goto auctus location and run following command to start the Flask APP
 python3 main.py
 
 ```
+
+Import a snapshot of our index
+-----------------------------------------
+
+```
+$ scripts/docker_import_snapshot.sh
+```
+
+This will download an Elasticsearch dump from auctus.vida-nyu.org and import it into your local Elasticsearch container.
+
 Now go the auctus link http://localhost:8001
 
 Search for term like 'cities'.
@@ -197,28 +207,8 @@ Ports:
 * Prometheus is at http://localhost:8040
 * Grafana is at http://localhost:8041
 
-Import a snapshot of our index (optional)
------------------------------------------
 
-```
-$ scripts/docker_import_snapshot.sh
-```
 
-This will download an Elasticsearch dump from auctus.vida-nyu.org and import it into your local Elasticsearch container.
-
-Start discovery plugins (optional)
-----------------------------------
-
-```
-$ docker-compose up -d socrata zenodo
-```
-
-Start metric dashboard (optional)
----------------------------------
-
-```
-$ docker-compose up -d elasticsearch_exporter prometheus grafana
-```
 
 
 Prometheus is configured to automatically find the containers (see [prometheus.yml](docker/prometheus.yml))
