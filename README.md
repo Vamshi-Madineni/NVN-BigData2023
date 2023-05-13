@@ -3,6 +3,13 @@ Auctus
 
 This project is a web crawler and search engine for datasets, specifically meant for data augmentation tasks in machine learning. It is able to find datasets in different repositories and index them for later retrieval.
 
+Requirements:
+
+Docker should be installed and started.
+
+Python should be installed
+
+
 [Documentation is available here](https://docs.auctus.vida-nyu.org/)
 
 It is divided in multiple components:
@@ -88,8 +95,66 @@ You can use the `--scale` option to start more profiler or apiserver containers,
 $ docker-compose up -d --scale profiler=4 --scale apiserver=8 cache-cleaner coordinator profiler apiserver apilb frontend
 ```
 
+Start Flask APP
+---------------
+
+### Reproducibility:
+
+Git clone the above project 
+
+Then go to this link and follow the steps to host the docker environment
+
+Then run the following commands
+```
+pip3 install flask 
+pip3 install flask_cors 
+pip3 install duckdb
+pip3 install minio 
+pip3 install  pandas 
+pip3 install pyarrow  
+```
+
+Then goto auctus location and run following command
+```
+python3 main.py
+
+```
+
+## Reproducibility for parsing Parquet in the Profiling pipeline
+
+We have modified Profiling pipeline to handle parquet file along with csv.
+To test the above pipeline execute the below commands where we are creating a sample parquet file and loading into the profiling pipeline using the profiler library process_dataset function
+Go to profiler container on docker desktop.
+Now click on Terminal.
+```
+$ cd  
+$ ls
+$ python3
+Python 3.8.16 (default, May  4 2023, 06:20:30) 
+[GCC 10.2.1 20210110] on linux
+Type "help", "copyright", "credits" or "license" for more information.
+>>> import datamart_profiler
+>>> import pandas
+>>> df = pandas.DataFrame({
+...     'place': ['france', 'france', 'italy', 'germany'],
+...     'favorite': ['Brittany', 'Normandie', 'Hamburg', 'Bavaria'],
+... })
+>>> df.to_parquet("sample.parquet")
+>>> datamart_profiler.process_dataset("sample.parquet")
+{'nb_rows': 4, 'nb_profiled_rows': 4, 'nb_columns': 2, 'columns': [{'name': 'place', 'structural_type': 'http://schema.org/Text', 'semantic_types': [], 'num_distinct_values': 3}, {'name': 'favorite', 'structural_type': 'http://schema.org/Text', 'semantic_types': [], 'num_distinct_values': 4}], 'types': [], 'attribute_keywords': ['place', 'favorite']}
+>>> 
+
+
+```
+
+![Steps for the above](docs/step1.png)
+![Steps for the above](docs/step2.png)
+![Steps for the above](docs/step3.png)
+
 Ports:
 * The web interface is at http://localhost:8001
+* Flask is at http://localhost:5001
+* Api for executing SQL query http://localhost:5001/query
 * The API at http://localhost:8002/api/v1 (behind HAProxy)
 * Elasticsearch is at http://localhost:8020
 * The Lazo server is at http://localhost:8030
@@ -122,6 +187,7 @@ Start metric dashboard (optional)
 ```
 $ docker-compose up -d elasticsearch_exporter prometheus grafana
 ```
+
 
 Prometheus is configured to automatically find the containers (see [prometheus.yml](docker/prometheus.yml))
 
