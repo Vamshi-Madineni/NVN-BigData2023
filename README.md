@@ -212,5 +212,3 @@ Ports:
 
 
 Prometheus is configured to automatically find the containers (see [prometheus.yml](docker/prometheus.yml))
-
-A custom RabbitMQ image is used, with added plugins (management and prometheus).
