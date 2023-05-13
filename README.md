@@ -29,13 +29,13 @@ It is divided in multiple components:
   * [The **coordinator**](coordinator/): this service collects some metrics and offers a maintenance interface for the system administrator.
   * [The **frontend**](frontend/): this is a React app implementing a user-friendly web interface on top of the API.
 
-![Auctus Architecture](docs/architecture.png)
+![Modified Auctus Architecture](docs/modarch.png)
 
 Elasticsearch is used as the search index, storing one document per known dataset.
 
 The services exchange messages through `RabbitMQ`, allowing us to have complex messaging patterns with queueing and retrying semantics, and complex patterns such as the on-demand querying.
 
-![AMQP Overview](docs/amqp.png)
+
 
 Deployment
 ==========
@@ -95,14 +95,12 @@ You can use the `--scale` option to start more profiler or apiserver containers,
 $ docker-compose up -d --scale profiler=4 --scale apiserver=8 cache-cleaner coordinator profiler apiserver apilb frontend
 ```
 
-Start Flask APP
----------------
 
 ### Reproducibility:
 
-Git clone the above project 
+Git clone the above project.
 
-Then go to this link and follow the steps to host the docker environment
+Follow the above steps to host the docker environment
 
 Then run the following commands
 ```
@@ -110,15 +108,41 @@ pip3 install flask
 pip3 install flask_cors 
 pip3 install duckdb
 pip3 install minio 
-pip3 install  pandas 
+pip3 install pandas 
 pip3 install pyarrow  
 ```
 
-Then goto auctus location and run following command
+Then goto auctus location and run following command to start the Flask APP
 ```
 python3 main.py
 
 ```
+Now go the auctus link http://localhost:8001
+
+Search for term like 'cities'.
+
+From the search result you can see the button "Execute SQL"
+
+First click on "Copy ID"
+
+![Copy](docs/copy.png)
+
+Now click on "Execute SQL", it would redirect to new tab.
+
+Now paste the datasetId on Dataset ID field
+
+Run this command on the sql section.
+
+"SELECT * FROM data LIMIT 10;"
+
+You can also download the queried data using "Download as CSV" button.
+
+![data](docs/data.png)
+
+
+It is possible to modify the limit and select columns, while maintaining the table name as "data". The dataset is being manipulated in the backend, but for ease of use for the user, we have chosen to temporarily name the table "data".
+
+
 
 ## Reproducibility for parsing Parquet in the Profiling pipeline
 
@@ -150,6 +174,12 @@ Type "help", "copyright", "credits" or "license" for more information.
 ![Steps for the above](docs/step1.png)
 ![Steps for the above](docs/step2.png)
 ![Steps for the above](docs/step3.png)
+
+
+### Minio Creds
+username: devkey
+pass : devpassword
+
 
 Ports:
 * The web interface is at http://localhost:8001
